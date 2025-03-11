@@ -44,6 +44,7 @@ while True:
         
         for elm in elementActif:
             print(elm)
+        elementActif.clear()
 
         """if questAnniv == "Y" and questMail == "Y":
             print(nom,numero,anniv,mail)
