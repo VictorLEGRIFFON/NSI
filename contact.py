@@ -12,7 +12,7 @@ lsiteNumero = []
 listeMail = []
 listeAnniv = []
 
-
+elementActif = []
 
 while True:
 
@@ -28,17 +28,24 @@ while True:
     if action == 1:
         nom = input("Nom : ")
         numero = int(input("Numéro : "))
+        elementActif.append(nom, numero)
         questAnniv = input("Voulez-vous ajouter un anniversaire ? ")
         if questAnniv == "Y":
             anniv = input("Date d'anniversaire : ")
+            elementActif.append(anniv)
         else:
             pass
         questMail = input("Voulez-vous ajouter un mail ?")
         if questMail == "Y":
             mail = input("Mail : ")
+            elementActif.append(mail)
         else:
             pass
-        if questAnniv == "Y" and questMail == "Y":
+        
+        for elm in elementActif:
+            print(elm)
+
+        """if questAnniv == "Y" and questMail == "Y":
             print(nom,numero,anniv,mail)
             listeNom.append(nom)
             lsiteNumero.append(numero)
@@ -61,7 +68,7 @@ while True:
             listeNom.append(nom)
             lsiteNumero.append(numero)
             listeAnniv.append(None)
-            listeMail.append(None)
+            listeMail.append(None)"""
             
         """validation = input("Valider l'enregistrement : ")
         if validation == "Y":
