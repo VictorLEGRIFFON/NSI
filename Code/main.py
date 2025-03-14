@@ -1,6 +1,8 @@
-
-
-
+from action1 import *
+from action2 import *
+from action3 import *
+from action4 import *
+from action5 import *
 import pickle
 
 
@@ -44,21 +46,6 @@ while True:
             elementActif.append(mail)
         else:
             pass
-        
-        """for elm in elementActif:
-            print(elm, end=" ")
-            for k in listeMois:
-                if k in elm:
-                    print("mois")
-                    break
-            for k in listeChiffre:
-                if k in elm:
-                    print("chiffre")
-                    break
-            for k in listeCaractereMail:
-                if k in elm:
-                    print("caractere mail")
-                    break"""
         
 
         
