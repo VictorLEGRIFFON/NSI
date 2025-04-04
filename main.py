@@ -1,103 +1,93 @@
-from action1 import *
-from action2 import *
-from action3 import *
-from action4 import *
-from action5 import *
 import pickle
 
+contacts = []
+   
+#---------------------------------Fonction pour Ajouter un contact---------------------------------
+
+def enregistrer_contact():
+    nom_fichier = "repertoire"
+    nom = str(input("Donner un nom : "))
+    nom = nom.capitalize()
+    numero = input("Donner un Numéro : ")
+    questAnnniv = input("Voulez-vous ajouter un anniversaire (Y/N) : ")
+    if questAnnniv == "Y" or questAnnniv == "y":
+        jour = input("Jour : ")
+        mois = input("Mois : ")
+        année = input("Année : ")
+        anniv = (jour+"/"+mois+"/"+année)
+        print(anniv)
+    else:
+        anniv = ''
+    questMail = input("Voulez-vous ajouter un mail (Y/N) : ")
+    if questMail == "Y" or questMail == "y":
+        mail = input("Adresse Mail : ")
+    else:
+        mail = ''
+    annivText = "Anniversaire : " + anniv
+    mailText = "Mail : " + mail
+    contacts.append(["Nom : ", nom, "Numéro : ", numero, annivText if anniv else "", mailText if mail else ""])
+    with open(nom_fichier, "wb") as fichier:
+        pickle.dump(contacts, fichier)
+    
+
+#---------------------------------Fonction pour lire les contacts---------------------------------
+
+def lire_contacts():
+    nom_fichier = "repertoire"
+    try:
+        with open(nom_fichier, "rb") as fichier:
+            contenu = pickle.load(fichier)
+            print(contenu)
+    except:
+        print("Aucun contact")
+    
+
+#---------------------------------Fonction pour Rechercher les contacts---------------------------------
 
 
-listeMois = ["janvier", "fevrier", "mars", "avril", "mai", "juin" , "juillet", "aout", "septembre", "octobre", "novembre", "decembre","/"]
-listeChiffre = ["0","1","2","3","4","5","6","7","8","9"]
-listeCaractereMail = ["@","gmail",".","com","fr","net","org","/","_","-"]
 
+#---------------------------------Fonction pour Supprimer les contacts---------------------------------
 
-elementActif = []
+def supprimer_contact():
+    nom_fichier = "repertoire"
+    nomChercher = str(input("Nom du contact à supprimer : "))
+    print(contacts)
+    for elm in contacts:
+        for nom in elm:
+            if nomChercher == str(nom):
+                with open(nom_fichier, "wb") as nom_fichier:
+                    contacts.remove(elm)
+                    print("Le contact ", nom ,"a été supprimé")
+                    break   
+            elif nomChercher == "Nom : ":
+                pass
+            
+            else:
+                print("Contact non trouvé")
 
-
-
-
+#---------------------------------Fonctiion pour créer le menu-------------------------------------
 
 while True:
+    def menu():
+        print("-"*30)
+        print("  Gestionnaire de contacts")
+        print("1. Ajouter un contact")
+        print("2. Lire les contacts")
+        print("3. Rechercher un contact")
+        print("4. Supprimer un contact")
+        choix = input("Votre choix: ")
+        if choix == "1":
+            enregistrer_contact()
+        elif choix == "2":
+            print("-"*30)
+            print("Répertoire des contacts :")
+            print("")
+            lire_contacts()
+        elif choix == "3":
+            lire_contacts()
+        elif choix == "4":
+            supprimer_contact()
+    menu()
 
-    print("        CONTACT")
-    print("")
-    print("1. Ajouter un contact")
-    print("2. Modifier un contact")
-    print("3. Supprimer un contact")
-    print("4. Voir mes contacts")
-    print("5. Chercher un contact")
-    
-    action = int(input("Que voulez_vous faire : "))
-    if action == 1:
-        nom = input("Nom : ")
-        numero = input("Numéro : ")
-        elementActif.append(nom)
-        elementActif.append(numero)
-        questAnniv = input("Voulez-vous ajouter un anniversaire ? ")
-        if questAnniv == "Y" or questAnniv == "y":
-            anniv = input("Date d'anniversaire : ")
-            elementActif.append(anniv)
-        else:
-            pass
-        questMail = input("Voulez-vous ajouter un mail ?")
-        if questMail == "Y" or questMail == "y":
-            mail = input("Mail : ")
-            elementActif.append(mail)
-        else:
-            pass
-        
 
-        
 
-        
-            
-    
-        validation = input("Valider l'enregistrement : ")
-        if validation == "Y" or validation == "y":
-            for elm in elementActif:
-                print(elm, end=" ")
-                for k in listeMois:
-                    if k in elm:
-                        print("mois")
-                        break
-                for k in listeChiffre:
-                    if k in elm:
-                        print("chiffre")
-                        break
-                for k in listeCaractereMail:
-                    if k in elm:
-                        print("mail")
-                        break
-            fichierActif = open("contact.txt", "wb")
-            pickle.dump(elementActif, fichierActif)
-            fichierActif.close()
-            print("Contact enregistré")
-        else:
-            print("Contact non enregistré")
-            elementActif.clear()
-            
-    elif action == 2:
-        print("Modifier Un Contact")
-        
-        print("Chercher:")
-        print("1. Nom")
-        print("2. Numero")
-        print("3. Anniv")
-        print("4. Mail")
-        elementChercher = input("/")
-        if elementChercher == "4":
-            pass
-        elif elementChercher == "3":
-            pass
-        elif elementChercher == "2":
-            pass
-        elif elementChercher == "1":
-            pass
-            
-    elif action == 3:
-        pass
-    elif action == 4:
-        pass
-    elif action == 5:
-        pass
